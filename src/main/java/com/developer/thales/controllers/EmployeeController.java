@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -21,20 +22,20 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee")
-    public ResponseEntity<?> getEmployeeById(@RequestParam(name = "id") int id) {
+    public ResponseEntity<Employee> getEmployeeById(@RequestParam(name = "id") int id) {
         try {
-            return new ResponseEntity<>(employeeService.getEmployee(id), HttpStatus.OK);
+            return ResponseEntity.ok().body(employeeService.getEmployee(id));
         } catch (IOException | ParseException e) {
-            return new ResponseEntity<>(HttpStatus.TOO_MANY_REQUESTS);
+            return ResponseEntity.ok().build();
         }
     }
 
     @GetMapping("/employees")
-    public ResponseEntity<?> getEmployees() {
+    public ResponseEntity<List<Employee>> getEmployees() {
         try {
             return new ResponseEntity<>(employeeService.getEmployees(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.TOO_MANY_REQUESTS);
+            return ResponseEntity.ok().build();
         }
     }
 }

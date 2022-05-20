@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         JSONObject object = (JSONObject) parser.parse(inline);
         JSONObject data = (JSONObject) object.get("data");
 
-        if (data.toString() != "null") {
+        if (data!=null) {
             String name = data.get("employee_name").toString();
             long salary = Long.parseLong(data.get("employee_salary").toString());
             int age = Integer.parseInt(data.get("employee_salary").toString());
@@ -47,7 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return new Employee(id, name, salary, age, profileImage, BusinessModel.getAnnualSalary(salary));
         }
 
-        return new Employee();
+        return null;
     }
 
     @Override
