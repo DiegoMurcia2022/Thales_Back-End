@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,7 +36,7 @@ public class EmployeeController {
         try {
             return new ResponseEntity<>(employeeService.getEmployees(), HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body(new ArrayList<>());
         }
     }
 }
